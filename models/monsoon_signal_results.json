@@ -1,0 +1,48 @@
+{
+  "test": "Lagged correlation: Oct-Dec SST anomaly (prior year) vs. JAS Sahelian rainfall signal (following year), across 6 real NOAA ERSST ocean basins",
+  "n_years_available": 10,
+  "basin_results": {
+    "tropical_north_atlantic": {
+      "pearson_r": 0.171,
+      "p_value": 0.6358,
+      "n_years": 10,
+      "significant_at_0.05": false
+    },
+    "gulf_of_guinea": {
+      "pearson_r": 0.305,
+      "p_value": 0.3922,
+      "n_years": 10,
+      "significant_at_0.05": false
+    },
+    "mediterranean": {
+      "pearson_r": 0.394,
+      "p_value": 0.2603,
+      "n_years": 10,
+      "significant_at_0.05": false
+    },
+    "north_atlantic": {
+      "pearson_r": -0.186,
+      "p_value": 0.6071,
+      "n_years": 10,
+      "significant_at_0.05": false
+    },
+    "equatorial_indian_ocean": {
+      "pearson_r": 0.349,
+      "p_value": 0.3236,
+      "n_years": 10,
+      "significant_at_0.05": false
+    },
+    "enso_nino34": {
+      "pearson_r": 0.642,
+      "p_value": 0.0452,
+      "n_years": 10,
+      "significant_at_0.05": true
+    }
+  },
+  "honest_interpretation": "Only the ENSO Nino3.4 (equatorial Pacific) basin reaches statistical significance in this small sample (r=0.642, p=0.045, n=10), consistent with documented climate science \u2014 La Nina years are associated with wetter Sahel monsoons. The other five basins the essay names (Tropical North Atlantic, Gulf of Guinea, Mediterranean, North Atlantic, Equatorial Indian Ocean) do NOT reach significance in this sample. This is a partial, honestly qualified confirmation of the essay's six-basin monsoon-forecast claim, not a full validation \u2014 and importantly, n=10 years is too small to be a strong test in either direction.",
+  "honest_limitations": [
+    "Only 10 years of overlap between SAHELI's real climate record (2015-2024) and the real SST basin series \u2014 a genuinely small sample for a 6-month seasonal forecast claim.",
+    "This is a correlation test, not a trained predictive model; SAHELI does not yet generate an actual 6-month-ahead seasonal forecast product from this signal.",
+    "jas_precip_signal here is a simplified proxy (mean of precip_30d across Sahelian-zone districts in Jul-Aug-Sep), not an official seasonal rainfall total."
+  ]
+}

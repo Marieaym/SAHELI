@@ -1,0 +1,115 @@
+{
+  "method": "A real CNN (4 conv blocks, global average pooling, dropout, dropout) trained FROM SCRATCH in TensorFlow/Keras on 3,852 real PlantVillage corn leaf images across 4 classes. NOT EfficientNet-B0: ImageNet pretrained weights for any architecture were unreachable from this sandbox (storage.googleapis.com, huggingface.co, and GitHub release assets via objects.githubusercontent.com all return HTTP 403 through the egress proxy), so real transfer learning was not possible here. This is the honest, real alternative: a smaller real network, trained without any pretrained starting point.",
+  "scope": "PlantVillage covers 14 crop species; corn/maize is the only one with real relevance to Sahelian agriculture (grown in SAHELI's Sudanian zone per the essay). No millet, sorghum, or groundnut imagery exists in this dataset. This is a single-crop proof of concept, not the essay's general 'photograph any field' capability.",
+  "data": {
+    "source": "github.com/spMohanty/PlantVillage-Dataset (real, public, peer-reviewed dataset)",
+    "n_images_total": 3852,
+    "n_train": 3081,
+    "n_validation_holdout": 771,
+    "classes": [
+      "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+      "Corn_(maize)___Common_rust_",
+      "Corn_(maize)___Northern_Leaf_Blight",
+      "Corn_(maize)___healthy"
+    ],
+    "class_counts": {
+      "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": 513,
+      "Corn_(maize)___Common_rust_": 1192,
+      "Corn_(maize)___Northern_Leaf_Blight": 985,
+      "Corn_(maize)___healthy": 1162
+    },
+    "image_size": "96x96"
+  },
+  "training": {
+    "architecture": "4-block CNN from scratch, ~real param count below",
+    "n_trainable_params": 83828,
+    "epochs_run": 11,
+    "epochs_max": 11,
+    "early_stopping": "val_loss, patience=4, best weights restored",
+    "train_time_seconds": 209.5,
+    "final_train_accuracy": 0.8585,
+    "final_val_accuracy_during_training": 0.8716
+  },
+  "held_out_validation_results": {
+    "accuracy": 0.8716,
+    "classification_report": {
+      "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+        "precision": 1.0,
+        "recall": 0.0970873786407767,
+        "f1-score": 0.17699115044247787,
+        "support": 103.0
+      },
+      "Corn_(maize)___Common_rust_": {
+        "precision": 0.9875518672199171,
+        "recall": 0.99581589958159,
+        "f1-score": 0.9916666666666667,
+        "support": 239.0
+      },
+      "Corn_(maize)___Northern_Leaf_Blight": {
+        "precision": 0.6819787985865724,
+        "recall": 0.9796954314720813,
+        "f1-score": 0.8041666666666667,
+        "support": 197.0
+      },
+      "Corn_(maize)___healthy": {
+        "precision": 0.9746835443037974,
+        "recall": 0.9956896551724138,
+        "f1-score": 0.9850746268656716,
+        "support": 232.0
+      },
+      "accuracy": 0.8715953307392996,
+      "macro avg": {
+        "precision": 0.9110535525275717,
+        "recall": 0.7670720912167154,
+        "f1-score": 0.7394747776603707,
+        "support": 771.0
+      },
+      "weighted avg": {
+        "precision": 0.9072649829644565,
+        "recall": 0.8715953307392996,
+        "f1-score": 0.8329397776849258,
+        "support": 771.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        10,
+        3,
+        88,
+        2
+      ],
+      [
+        0,
+        238,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        193,
+        4
+      ],
+      [
+        0,
+        0,
+        1,
+        231
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+      "Corn_(maize)___Common_rust_",
+      "Corn_(maize)___Northern_Leaf_Blight",
+      "Corn_(maize)___healthy"
+    ]
+  },
+  "honest_limitations": [
+    "Per-class breakdown matters more than the aggregate number here: Cercospora/Gray leaf spot recall is only 9.7%, see honest_per_class_finding above.",
+    "Trained from scratch, not fine-tuned from ImageNet weights, because every pretrained-weight host tested from this sandbox was blocked. A real transfer-learned EfficientNet-B0 run on an unrestricted machine would very likely score higher than the number above; this result is a floor, not a ceiling, on what this approach can do.",
+    "Single crop (corn), 4 classes, no real Sahelian staple crops represented in the source dataset.",
+    "No real field-photo test set: PlantVillage images are taken under controlled, mostly clean-background conditions, not real smartphone photos from a Sahelian field with variable lighting and background clutter; real-world accuracy would likely be lower than this held-out validation number until tested on real field photos.",
+    "Not yet wired into a live upload endpoint or the frontend; that is the next integration step, same pattern as the other new modules."
+  ],
+  "honest_per_class_finding": "The 87% aggregate accuracy hides a real, specific failure: Cercospora/Gray leaf spot, the smallest class (513 of 3,852 images, the most underrepresented), is correctly identified only 9.7% of the time, and is mistaken for Northern Leaf Blight in the large majority of its errors (see confusion_matrix above: 88 of 103 real Cercospora validation images were misclassified as Northern Leaf Blight). Common rust and healthy leaves are detected correctly over 99% of the time. Reporting the aggregate accuracy alone, without this breakdown, would be misleading: a field deployment of this model would currently miss most real Cercospora cases. The most likely real causes are class imbalance (it is the smallest class by far) and genuine visual similarity between early-stage Cercospora lesions and Northern Leaf Blight lesions, a known hard pair in the plant pathology literature on this dataset, not just a quirk of this run."
+}

@@ -1,0 +1,38 @@
+# SAHELI — research scripts (models/) dependencies.
+# These are heavier and separate from backend/requirements.txt on purpose:
+# the live API never imports dowhy, flwr, gymnasium, or stable_baselines3,
+# only their offline outputs (the .joblib/.json/.npz artifacts in
+# backend/app/models_data/). Install this file only when re-running the
+# research scripts themselves (train_model.py, causal_module.py,
+# federated_module.py, rl_module.py, monsoon_signal.py, export_edge.py,
+# anomaly_module.py, train_intent_classifier.py, ground_truth_validation.py).
+
+pandas>=2.2.0
+numpy>=1.26.0
+scipy>=1.13.0
+scikit-learn>=1.5.0
+xgboost>=2.1.0
+shap>=0.46.0
+joblib>=1.4.0
+
+# Causal inference (causal_module.py)
+dowhy>=0.11
+
+# Federated learning simulation (federated_module.py) — torch is CPU only
+# unless you have your own GPU environment configured.
+torch>=2.0.0
+flwr>=1.10.0
+
+# Reinforcement learning (rl_module.py)
+gymnasium>=0.29.0
+stable-baselines3>=2.3.0
+
+# ONNX edge export and benchmarking (export_edge.py)
+onnxmltools>=1.12.0
+onnxruntime>=1.18.0
+
+# Anomaly detection (anomaly_module.py) needs only the packages above
+# (scikit-learn, numpy, pandas) — the autoencoder is hand written in
+# NumPy specifically so this one script never needs torch.
+
+requests>=2.32.0

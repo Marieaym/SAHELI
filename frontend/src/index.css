@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme="light"] {
+  --c-night: 15 23 42;
+  --c-surface: 248 246 241;
+  --c-sidebar: 255 255 255;
+  --c-card: 255 255 255;
+  --c-cardBorder: 226 220 208;
+  --c-primary: 180 120 40;
+  --c-gold: 180 120 40;
+  --c-goldBright: 214 162 74;
+  --c-sand: 15 23 42;
+  --c-muted: 100 90 72;
+  --c-clay: 184 50 39;
+  --c-amber: 217 119 6;
+  --c-acacia: 22 120 72;
+  --c-indigo: 30 27 75;
+}
+
+[data-theme="dark"] {
+  --c-night: 8 10 18;
+  --c-surface: 12 14 24;
+  --c-sidebar: 16 19 32;
+  --c-card: 22 26 42;
+  --c-cardBorder: 48 52 72;
+  --c-primary: 232 184 96;
+  --c-gold: 214 162 74;
+  --c-goldBright: 245 210 130;
+  --c-sand: 248 246 241;
+  --c-muted: 148 140 120;
+  --c-clay: 248 113 96;
+  --c-amber: 251 191 36;
+  --c-acacia: 74 200 128;
+  --c-indigo: 49 46 129;
+}
+
+body {
+  background: rgb(var(--c-surface));
+  color: rgb(var(--c-sand));
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: 'Fraunces', serif; }
+.font-mono { font-family: 'IBM Plex Mono', monospace; }
+
+@layer components {
+  .app-shell {
+    @apply flex min-h-screen;
+    background: rgb(var(--c-surface));
+  }
+
+  .sidebar-panel {
+    @apply w-[268px] flex-shrink-0 flex flex-col min-h-screen border-r border-cardBorder;
+    background: rgb(var(--c-sidebar));
+  }
+
+  .page-shell {
+    @apply flex-1 min-w-0 w-full p-5 md:p-6 lg:p-7 overflow-y-auto;
+    background:
+      radial-gradient(ellipse 80% 50% at 100% 0%, rgb(var(--c-gold) / 0.05), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgb(var(--c-indigo) / 0.06), transparent 45%),
+      rgb(var(--c-surface));
+  }
+
+  .top-bar {
+    @apply sticky top-0 z-40 flex items-center gap-4 px-5 md:px-7 py-3 border-b border-cardBorder backdrop-blur-xl;
+    background: rgb(var(--c-sidebar) / 0.92);
+  }
+
+  .dash-grid {
+    @apply grid gap-4 md:gap-5;
+  }
+
+  .sparkline-card {
+    @apply bento-card p-4 relative overflow-hidden;
+  }
+  .sparkline-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgb(var(--c-gold) / 0.04), transparent 60%);
+    pointer-events: none;
+  }
+
+  .nav-section-label {
+    @apply px-4 pt-4 pb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-muted/80;
+  }
+
+  .bento-card {
+    @apply overflow-hidden relative;
+    border-radius: 1.5rem;
+    background: rgb(var(--c-card));
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06), 0 1px 4px rgba(15, 23, 42, 0.03);
+    border: 1px solid rgb(var(--c-cardBorder) / 0.75);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .bento-card:hover { box-shadow: 0 8px 32px rgba(15, 23, 42, 0.09); }
+
+  .bento-hero {
+    @apply overflow-hidden relative;
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, #0f172a 0%, rgb(var(--c-indigo)) 45%, #312e81 100%);
+    box-shadow: 0 16px 48px rgba(15, 23, 42, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .bento-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 85% 20%, rgba(214, 162, 74, 0.18), transparent 55%);
+    pointer-events: none;
+  }
+
+  .bento-photo {
+    @apply overflow-hidden relative;
+    border-radius: 1.5rem;
+    background: linear-gradient(155deg, #b45309 0%, #c2410c 35%, #7c2d12 100%);
+    box-shadow: 0 12px 40px rgba(180, 83, 9, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .bento-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.25), transparent 50%);
+    pointer-events: none;
+  }
+
+  .bento-indigo {
+    border-radius: 1.5rem;
+    background: linear-gradient(135deg, rgb(var(--c-indigo)) 0%, #1e3a5f 55%, #134e4a 100%);
+    box-shadow: 0 12px 40px rgba(30, 27, 75, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-overlay {
+    @apply backdrop-blur-xl border border-white/20;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl rounded-2xl border border-white/10;
+    background: rgba(0, 0, 0, 0.32);
+  }
+
+  .nav-pill {
+    @apply flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 text-muted;
+  }
+  .nav-pill:hover { @apply bg-night/5 text-sand; }
+  .nav-pill-active {
+    @apply text-white shadow-sm;
+    background: linear-gradient(135deg, rgb(var(--c-gold)), rgb(var(--c-amber)));
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl px-5 py-2.5 transition-all duration-200 disabled:opacity-50 text-night;
+    background: linear-gradient(135deg, rgb(var(--c-goldBright)), rgb(var(--c-gold)));
+    box-shadow: 0 4px 16px rgba(180, 120, 40, 0.3);
+  }
+  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(180, 120, 40, 0.4); }
+  [data-theme="dark"] .btn-primary { @apply text-night; }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-cardBorder text-sand hover:bg-night/5 font-medium rounded-xl px-5 py-2.5 transition-all;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-xl text-muted hover:text-sand hover:bg-night/5 transition-all;
+  }
+
+  .btn-glass {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white border border-white/20 transition-all;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+  }
+  .btn-glass:hover { background: rgba(255, 255, 255, 0.22); }
+
+  .input-field {
+    @apply w-full bg-white border border-cardBorder text-sand rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 transition-all;
+  }
+  [data-theme="dark"] .input-field { @apply bg-night/40; }
+
+  .glass-card {
+    @apply bg-card rounded-2xl border border-cardBorder;
+    box-shadow: 0 2px 16px rgba(15, 23, 42, 0.05);
+  }
+
+  .stat-pill {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold rounded-full px-3 py-1;
+  }
+
+  .ai-badge {
+    @apply text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md text-white;
+    background: linear-gradient(135deg, rgb(var(--c-indigo)), #4338ca);
+  }
+
+  .metric-chip {
+    @apply glass-overlay rounded-xl px-4 py-3 text-white;
+  }
+
+  .feature-card-header {
+    @apply h-28 flex items-center justify-center relative overflow-hidden;
+  }
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-thumb { background: rgb(var(--c-cardBorder)); border-radius: 99px; }
+
+.leaflet-container { background: rgb(var(--c-night)) !important; border-radius: 1rem; }
+.leaflet-popup-content-wrapper {
+  background: rgb(var(--c-card)) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgb(var(--c-cardBorder)) !important;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.12); }
+}
+.animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.55; }
+  75%, 100% { transform: scale(1.6); opacity: 0; }
+}
+.animate-ping-slow { animation: ping-slow 1.8s cubic-bezier(0, 0, 0.2, 1) infinite; }
+
+@keyframes flow-packet {
+  0% { left: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+.animate-flow-packet { animation: flow-packet 1.1s ease-in-out infinite; box-shadow: 0 0 10px 2px rgb(var(--c-goldBright)); }
+
+.chat-bubble-assistant {
+  @apply bg-card border border-cardBorder text-sand rounded-2xl rounded-tl-md px-5 py-3.5 text-sm leading-relaxed shadow-sm;
+}
+.chat-bubble-user {
+  @apply text-night rounded-2xl rounded-tr-md px-5 py-3.5 text-sm font-medium shadow-md;
+  background: linear-gradient(135deg, rgb(var(--c-goldBright)), rgb(var(--c-gold)));
+}
+
+.floating-ai-btn {
+  box-shadow: 0 6px 28px rgba(180, 120, 40, 0.4);
+}
+
+.horizon-rule {
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8'%3E%3Cpath d='M0,6 Q25,2 50,5 T100,4 T150,6 T200,4' fill='none' stroke='%23b45309' stroke-width='1' opacity='0.35'/%3E%3C/svg%3E") repeat-x;
+  background-size: 200px 6px;
+}

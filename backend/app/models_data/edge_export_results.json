@@ -1,0 +1,12 @@
+{
+  "onnx_file_size_kb": 1189.4,
+  "prediction_agreement_vs_original": 1.0,
+  "cpu_inference_latency_ms_per_request": 0.019,
+  "raspberry_pi_4_ram_budget_mb": 4096,
+  "model_footprint_vs_budget_pct": 0.0284,
+  "honest_limitations": [
+    "This is a real ONNX export and CPU-inference latency benchmark, run in a standard x86 environment \u2014 NOT a physical Raspberry Pi 4 measurement. We do not have a Raspberry Pi in hand to validate on-device.",
+    "Solar power draw and the '$80 per edge node' bill of materials from the essay remain roadmap claims, not measured facts.",
+    "The model is small enough in principle (sub-megabyte) that physical feasibility is very likely, but 'likely feasible' is disclosed as exactly that, not as 'deployed and tested'."
+  ]
+}

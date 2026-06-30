@@ -1,0 +1,21 @@
+{
+  "name": "SAHELI — Sahel Anticipatory Hub",
+  "short_name": "SAHELI",
+  "description": "Sahel Anticipatory Hub for Early-warning, Land Intelligence, and Food Security. Real climate, conflict, and food-security AI models for six Sahelian countries.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#08090F",
+  "theme_color": "#A86E2A",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["government", "utilities", "weather"],
+  "icons": [
+    { "src": "/icons/favicon-16.png", "sizes": "16x16", "type": "image/png" },
+    { "src": "/icons/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

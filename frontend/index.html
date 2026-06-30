@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="SAHELI — Sahel Anticipatory Hub for Early-warning, Land Intelligence, and food security" />
+    <meta name="theme-color" content="#A86E2A" />
+    <title>SAHELI — Food Security Early Warning</title>
+
+    <!-- PWA: installable as a real home-screen app on Android (Chrome) and iOS (Safari) -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="SAHELI" />
+    <meta name="mobile-web-app-capable" content="yes" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {
+            // Installability degrades gracefully: the app still works
+            // perfectly as a normal website if the service worker fails
+            // to register for any reason, it just won't offer the
+            // native "Install app" prompt.
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

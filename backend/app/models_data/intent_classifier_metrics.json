@@ -1,0 +1,20 @@
+{
+  "n_examples": 398,
+  "n_classes": 7,
+  "classes": [
+    "comparison",
+    "food_security_question",
+    "forecast_question",
+    "off_topic",
+    "ranking",
+    "recommendation",
+    "single_district"
+  ],
+  "cv_accuracy_mean": 0.7713,
+  "cv_accuracy_std": 0.0293,
+  "method": "TF-IDF (1-2 grams) + Logistic Regression, scikit-learn, district names normalized to a placeholder before training",
+  "honest_limitations": [
+    "Small, hand-written, bilingual (EN/FR) training set \u2014 robust for common real phrasings tested, not exhaustive.",
+    "This is intent ROUTING for the existing rule-based fallback response generator, not a generative language model."
+  ]
+}

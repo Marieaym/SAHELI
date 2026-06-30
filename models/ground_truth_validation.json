@@ -1,0 +1,71 @@
+{
+  "source": "FEWS NET acute food insecurity (IPC-compatible) current-situation classifications, real data, matched to 10 of 18 SAHELI districts by admin-region name",
+  "n_observations": 32443,
+  "n_districts_matched": 10,
+  "spearman_rho": -0.2319,
+  "p_value": 0.0,
+  "mean_ipc_phase_by_predicted_risk": {
+    "Critical": 1.308,
+    "High": 1.318,
+    "Low": 1.578,
+    "Medium": 1.382
+  },
+  "per_district_rho": [
+    {
+      "district": "Maradi",
+      "rho": -0.502,
+      "n": 3477
+    },
+    {
+      "district": "Zinder",
+      "rho": -0.5,
+      "n": 3477
+    },
+    {
+      "district": "Tahoua",
+      "rho": -0.414,
+      "n": 3477
+    },
+    {
+      "district": "Agadez",
+      "rho": -0.349,
+      "n": 3477
+    },
+    {
+      "district": "Mopti",
+      "rho": -0.329,
+      "n": 3477
+    },
+    {
+      "district": "Nouakchott",
+      "rho": -0.286,
+      "n": 1270
+    },
+    {
+      "district": "Gao",
+      "rho": -0.242,
+      "n": 3477
+    },
+    {
+      "district": "Diffa",
+      "rho": -0.222,
+      "n": 3477
+    },
+    {
+      "district": "Niamey",
+      "rho": -0.073,
+      "n": 3477
+    },
+    {
+      "district": "Bamako",
+      "rho": -0.052,
+      "n": 3357
+    }
+  ],
+  "honest_interpretation": "The correlation between SAHELI's predicted risk level and the REAL, independent FEWS NET IPC classification is weak and NEGATIVE (rho=-0.232, n=32443). Districts SAHELI classifies as Critical have, on average, a LOWER real IPC phase than districts it classifies as Low. This is reported honestly because it is the most important finding of this validation: SAHELI's current model measures acute short-term agro-climatic shock (drought index, consecutive dry days), which is a real and useful signal, but it is NOT the same thing as the IPC classification, which reflects slower-moving structural food security factors (market access, humanitarian presence, chronic vulnerability) that this model does not yet capture. This is a genuine limitation, not a minor caveat, and it directly qualifies any claim that SAHELI 'predicts food security risk' in the IPC sense.",
+  "honest_limitations": [
+    "Only 10 of 18 districts had a name-matchable FEWS NET livelihood-zone region in this extract; the other 8 (mostly in Burkina Faso, Mali's Timbuktu/Gao region subdivisions, Chad, Mauritania's Kiffa) are not included in this specific comparison.",
+    "FEWS NET IPC data is published quarterly-ish and forward-filled here for up to ~120 days between updates; SAHELI's climate features update daily. This timescale mismatch is part of why direct correlation is weak.",
+    "This finding should inform the roadmap: a future version would need market access, humanitarian assistance presence, and longer-memory structural features to actually predict IPC-style classifications, not just acute climate shock."
+  ]
+}

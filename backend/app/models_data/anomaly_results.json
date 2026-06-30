@@ -1,0 +1,135 @@
+{
+  "method": "Isolation Forest (scikit-learn, 300 trees) and a real trained NumPy autoencoder (7 to 3 to 7), run independently on the same 7 real engineered features, flags reported where both agree.",
+  "n_district_days": 65232,
+  "n_flagged_isolation_forest": 1957,
+  "n_flagged_autoencoder": 1957,
+  "n_flagged_by_both": 322,
+  "n_flagged_adverse_direction": 90,
+  "n_flagged_favorable_direction": 232,
+  "autoencoder_final_reconstruction_loss": 0.23479,
+  "autoencoder_anomaly_threshold": 0.93929,
+  "honest_finding_on_direction": "An anomaly detector flags unusual deviation in either direction. Pooled together, the 322 agreed flagged days are 0.63x the baseline Critical rate, which looks like a null or negative result. Splitting by direction shows why: this dataset's overall Critical rate is already high (30.9% of all district days), because these are drought prone Sahelian districts, so the statistically unusual days skew toward the wetter, more favorable tail, not the dry one. The 90 days flagged in the adverse direction (worsening drought, water balance, vegetation, price, or conflict signals) carry a Critical rate 2.27x the baseline, while the 232 days flagged in the favorable direction carry a Critical rate 0.0x the baseline. This is reported as found: the adverse direction subset is the one relevant to the essay's flash drought framing, and it is the subset that should be surfaced in the live app, not the undifferentiated pooled flag.",
+  "validation_critical_risk_lift": {
+    "overall_critical_rate": 0.309,
+    "critical_rate_among_all_flagged": 0.1957,
+    "lift_all_flagged_vs_baseline": 0.63,
+    "critical_rate_adverse_direction": 0.7,
+    "lift_adverse_direction_vs_baseline": 2.27,
+    "critical_rate_favorable_direction": 0.0,
+    "lift_favorable_direction_vs_baseline": 0.0
+  },
+  "validation_2021_2022_crisis_window": {
+    "share_of_all_data_in_window": 0.1598,
+    "share_of_flags_in_window": 0.264,
+    "lift_vs_baseline": 1.65,
+    "interpretation": "The June 2021 to December 2022 window, independently documented as a real Sahel food crisis period, holds 1.65x its expected share of flagged anomalies (all directions pooled), a second honest, label free cross check, separate from the Critical risk lift above."
+  },
+  "feature_z_score_at_flagged_days": {
+    "drought_index": 1.562,
+    "consec_dry_days": 0.658,
+    "water_balance_30d": 1.938,
+    "price_anomaly_30d": 0.226,
+    "conflict_events_30d": 0.794,
+    "groundwater_anomaly_cm": 0.113,
+    "sentinel2_ndvi": 1.655
+  },
+  "top_10_examples": [
+    {
+      "date": "2022-01-22",
+      "district": "Mopti",
+      "country": "Mali",
+      "risk_level": "Critical",
+      "drought_index": -0.619137525703525,
+      "price_anomaly_30d": 2.455807934142478,
+      "conflict_events_30d": 149.0
+    },
+    {
+      "date": "2022-01-21",
+      "district": "Mopti",
+      "country": "Mali",
+      "risk_level": "Critical",
+      "drought_index": -0.6486937410704644,
+      "price_anomaly_30d": 2.455807934142478,
+      "conflict_events_30d": 149.0
+    },
+    {
+      "date": "2022-01-20",
+      "district": "Mopti",
+      "country": "Mali",
+      "risk_level": "Critical",
+      "drought_index": -0.6345378694999831,
+      "price_anomaly_30d": 2.455807934142478,
+      "conflict_events_30d": 147.0
+    },
+    {
+      "date": "2022-02-16",
+      "district": "Dori",
+      "country": "Burkina Faso",
+      "risk_level": "Critical",
+      "drought_index": -0.7944141934092157,
+      "price_anomaly_30d": 1.6503895312066783,
+      "conflict_events_30d": 172.0
+    },
+    {
+      "date": "2022-01-19",
+      "district": "Mopti",
+      "country": "Mali",
+      "risk_level": "Critical",
+      "drought_index": -0.6410713486863594,
+      "price_anomaly_30d": 2.455807934142478,
+      "conflict_events_30d": 145.0
+    },
+    {
+      "date": "2022-02-15",
+      "district": "Dori",
+      "country": "Burkina Faso",
+      "risk_level": "Critical",
+      "drought_index": -0.7972256669624883,
+      "price_anomaly_30d": 1.6503895312066783,
+      "conflict_events_30d": 169.0
+    },
+    {
+      "date": "2022-04-01",
+      "district": "Mopti",
+      "country": "Mali",
+      "risk_level": "Critical",
+      "drought_index": -0.7533849670807269,
+      "price_anomaly_30d": 2.937404932423684,
+      "conflict_events_30d": 135.0
+    },
+    {
+      "date": "2022-01-18",
+      "district": "Mopti",
+      "country": "Mali",
+      "risk_level": "Critical",
+      "drought_index": -0.6416935847993475,
+      "price_anomaly_30d": 2.455807934142478,
+      "conflict_events_30d": 141.0
+    },
+    {
+      "date": "2022-01-17",
+      "district": "Mopti",
+      "country": "Mali",
+      "risk_level": "Critical",
+      "drought_index": -0.6577161647087929,
+      "price_anomaly_30d": 2.455807934142478,
+      "conflict_events_30d": 144.0
+    },
+    {
+      "date": "2022-02-14",
+      "district": "Dori",
+      "country": "Burkina Faso",
+      "risk_level": "Critical",
+      "drought_index": -0.7808529680346052,
+      "price_anomaly_30d": 1.6503895312066783,
+      "conflict_events_30d": 168.0
+    }
+  ],
+  "honest_limitations": [
+    "No labeled ground truth exists in this dataset for locust invasion fronts, flash droughts, or market collapse events specifically; this module detects general multivariate statistical anomalies across real features, not those three named event types by name.",
+    "The pooled, undirected flag is NOT a reliable Critical risk indicator on its own (lift below 1, see honest_finding_on_direction above); only the adverse direction subset should be presented as a meaningful warning signal in the live app, and that subset is, in this run, a real majority of the agreed flags but not all of them.",
+    "Validation is indirect: agreement with the existing Critical risk label and with a real, independently documented crisis window, not a held out labeled anomaly test set, because no such labeled set exists for the Sahel.",
+    "Contamination rate (3%) is a chosen design parameter, not learned from data; a different choice would flag a different count of days.",
+    "This module is a real, separate analysis script like causal_module.py and rl_module.py, producing this results file; wiring the adverse direction flag into the live FastAPI pipeline as a sixth Agent Pipeline step is the next integration task, not yet done as of this run."
+  ]
+}

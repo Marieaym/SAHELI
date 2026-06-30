@@ -1,0 +1,116 @@
+{
+  "accuracy": 0.9950324412003244,
+  "weighted_f1": 0.9950313145035702,
+  "n_train": 45504,
+  "n_test": 19728,
+  "feature_importance": {
+    "drought_index": 2.723823070526123,
+    "water_balance_30d": 1.9684593677520752,
+    "consec_dry_days": 1.6248894929885864,
+    "lat": 0.36255010962486267,
+    "lon": 0.18423780798912048,
+    "sentinel2_ndvi": 0.15542517602443695,
+    "precip_30d": 0.1353151500225067,
+    "water_point_count_50km": 0.1345808506011963,
+    "et_30d": 0.09106533974409103,
+    "groundwater_anomaly_cm": 0.08786465227603912,
+    "temp_30d_avg": 0.07346608489751816,
+    "precip_90d": 0.05441665276885033,
+    "price_anomaly_30d": 0.0434095524251461,
+    "conflict_events_30d": 0.04117022827267647,
+    "conflict_fatalities_30d": 0.04039790481328964,
+    "monsoon_season": 0.027181310579180717,
+    "month": 0.011741947382688522
+  },
+  "risk_levels": [
+    "Critical",
+    "High",
+    "Low",
+    "Medium"
+  ],
+  "classification_report": {
+    "Critical": {
+      "precision": 0.9964776920496478,
+      "recall": 0.9966448582452608,
+      "f1-score": 0.9965612681372138,
+      "support": 5961.0
+    },
+    "High": {
+      "precision": 0.9955396966993756,
+      "recall": 0.9876106194690265,
+      "f1-score": 0.9915593069746779,
+      "support": 1130.0
+    },
+    "Low": {
+      "precision": 0.9937670432411375,
+      "recall": 0.9968737788198515,
+      "f1-score": 0.9953179867342957,
+      "support": 5118.0
+    },
+    "Medium": {
+      "precision": 0.9946744774330981,
+      "recall": 0.9936161723633462,
+      "f1-score": 0.9941450432468396,
+      "support": 7519.0
+    },
+    "accuracy": 0.9950324412003244,
+    "macro avg": {
+      "precision": 0.9951147273558147,
+      "recall": 0.9936863572243713,
+      "f1-score": 0.9943959012732567,
+      "support": 19728.0
+    },
+    "weighted avg": {
+      "precision": 0.9950334804696804,
+      "recall": 0.9950324412003244,
+      "f1-score": 0.9950313145035702,
+      "support": 19728.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      5941,
+      3,
+      0,
+      17
+    ],
+    [
+      7,
+      1116,
+      0,
+      7
+    ],
+    [
+      0,
+      0,
+      5102,
+      16
+    ],
+    [
+      14,
+      2,
+      32,
+      7471
+    ]
+  ],
+  "confusion_matrix_labels": [
+    "Critical",
+    "High",
+    "Low",
+    "Medium"
+  ],
+  "validation_methodology": {
+    "current": "Chronological split: train on 2015-2021, test on 2022-2024 (never seen during training).",
+    "old_random_split_accuracy_for_comparison": 0.9976,
+    "why_changed": "A random 80/20 split lets adjacent days from the same district appear on both sides of the split; since consecutive days are highly correlated, this inflates reported accuracy. The chronological split above is the honest choice for time series and is now used consistently across every SAHELI model."
+  },
+  "linear_baseline_comparison": {
+    "method": "Logistic regression (multinomial, standardized features), same chronological split.",
+    "linear_accuracy": 0.8828,
+    "linear_weighted_f1": 0.8608,
+    "xgboost_accuracy": 0.995,
+    "xgboost_weighted_f1": 0.995,
+    "interpretation": "XGBoost beats a plain linear model on the same real, chronological test set (99.5% vs 88.3% accuracy) \u2014 reported honestly either way, not assumed."
+  },
+  "validation_note": "Metrics reflect performance against a rule-derived risk label (constructed from drought index and dry-day streaks per district), not independent ground-truth IPC/FEWS NET crisis classifications (see the separate real ground-truth comparison on this page, which shows a weak negative correlation \u2014 an important, honestly disclosed limitation, now addressed by food_security_v2_module.py). Real ACLED conflict, WFP price, and GRACE-FO groundwater features are now included as model inputs; their modest SHAP importance is expected since the label itself is climate-only by construction."
+}

@@ -1,0 +1,20 @@
+{
+  "setup": {
+    "n_districts": 18,
+    "budget_usd": 1500000,
+    "algorithm": "PPO (Stable-Baselines3)",
+    "training_timesteps": 20000,
+    "evaluation_episodes": 200,
+    "dynamics_source": "Same severity/pop_weight/diminishing-returns formulas as the deployed proportional heuristic in routers/intervention.py"
+  },
+  "mean_severity_points_resolved": {
+    "ppo_policy": 23.324,
+    "proportional_heuristic": 21.929
+  },
+  "improvement_over_heuristic_pct": 6.36,
+  "honest_limitations": [
+    "Population weights are illustrative relative-size proxies already used elsewhere in SAHELI, not verified census figures.",
+    "The environment's reward dynamics are a real but simplified model of intervention effectiveness (diminishing-returns exponential response); real-world aid effectiveness depends on logistics, timing, and local context not captured here.",
+    "The agent is trained on one country's district distribution with stochastic resets, not on historical multi-year intervention outcomes (no such labeled outcome dataset exists for the Sahel)."
+  ]
+}
