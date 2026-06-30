@@ -420,7 +420,8 @@ def build_action_plan(row, lang="en", v2_result=None):
         strategic.append(("Renforcer les infrastructures de r\u00e9silience hydrique identifi\u00e9es comme insuffisantes", "Coop\u00e9ration au d\u00e9veloppement"))
         if v2_result is not None:
             agree_txt = "confirm\u00e9 par les deux mod\u00e8les (climat et s\u00e9curit\u00e9 alimentaire r\u00e9elle)" if fs_agrees else "signal divergent entre les deux mod\u00e8les, \u00e0 surveiller pour affiner le mod\u00e8le"
-            strategic.append((f"Note m\u00e9thodologique : ce diagnostic est {agree_txt}. Statut de validation locale : {'donn\u00e9es FEWS NET r\u00e9elles disponibles' if v2_result['status']=='validated' else 'extrapol\u00e9, pas encore de vraies donn\u00e9es FEWS NET pour ce district'}.", "\u00c9quipe SAHELI"))
+            validation_status_txt = "donn\u00e9es FEWS NET r\u00e9elles disponibles" if v2_result['status'] == 'validated' else "extrapol\u00e9, pas encore de vraies donn\u00e9es FEWS NET pour ce district"
+            strategic.append((f"Note m\u00e9thodologique : ce diagnostic est {agree_txt}. Statut de validation locale : {validation_status_txt}.", "\u00c9quipe SAHELI"))
         return {"immediate": immediate, "short_term": short_term, "strategic": strategic}
 
     immediate, short_term, strategic = [], [], []
