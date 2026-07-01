@@ -4,7 +4,26 @@ import axios from "axios";
 // Falls back to localhost for local development.
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
-export const api = axios.create({ baseURL: API_BASE, timeout: 20000 });
+export const api = axios.create({ baseURL: API_BASE, timeout: 60000 });
+
+// Automatic retry for network errors (ECONNABORTED, ETIMEDOUT) — common on
+// mobile when the Render free tier is waking up from sleep. Retries up to 2
+// times with a 3-second pause, covering the typical 50-60s cold start window.
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const config = error.config;
+    if (!config) return Promise.reject(error);
+    config._retryCount = config._retryCount || 0;
+    const isNetworkError = !error.response && (error.code === "ECONNABORTED" || error.code === "ERR_NETWORK" || error.message === "Network Error");
+    if (isNetworkError && config._retryCount < 2) {
+      config._retryCount += 1;
+      await new Promise((res) => setTimeout(res, 3000));
+      return api(config);
+    }
+    return Promise.reject(error);
+  }
+);
 
 const tok = localStorage.getItem("saheli_token");
 if (tok) api.defaults.headers.common.Authorization = `Bearer ${tok}`;
