@@ -220,8 +220,12 @@ export async function getCropScans(district) {
 }
 
 export async function getCountries() {
-  const { data } = await api.get("/api/auth/countries");
-  return data.countries;
+  try {
+    const { data } = await api.get("/api/auth/countries");
+    return data.countries?.length ? data.countries : ["Niger", "Mali", "Burkina Faso", "Chad", "Mauritania", "Senegal"];
+  } catch {
+    return ["Niger", "Mali", "Burkina Faso", "Chad", "Mauritania", "Senegal"];
+  }
 }
 
 export async function registerUser(payload) {
